@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="app">
+      <SelectionState runConfigName="Dice_Roll">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Dice_Roll">
+      <SelectionState runConfigName="Dice Roll">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
