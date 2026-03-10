@@ -9,23 +9,29 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --background: oklch(97.823% 0.00344 324.096);
+  --foreground: oklch(18.834% 0.00256 325.288);
   --font-size: 16px;
-  --card: oklch(1 0 0);
+  --card: oklch(0.985 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.985 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(56.201% 0.27802 308.889);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
+  --secondary: oklch(25.958% 0.095 312.275);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(96.569% 0.002 14);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+  --advantage: oklch(0.65 0.2 150);
+  --advantage-foreground: oklch(0.985 0 0);
+  --disadvantage: oklch(0.58 0.22 27);
+  --disadvantage-foreground: #ffffff;
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: #ffffff;
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: oklch(71.366% 0.01926 261.373);
+  --input: oklch(96% 0.002 14);
   --input-background: #f3f3f5;
   --switch-background: #cbced4;
   --font-weight-medium: 500;
@@ -52,8 +58,6 @@
   --d12: oklch(0.8993 0.1938 85.99);
   --d20: oklch(0.7249 0.1863 149.84);
   --d100: oklch(0.8084 0.0991 205.23);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 }
 
 .dark {

@@ -5,7 +5,7 @@ interface FooterProps {
   onRoll: () => void;
   onAdvantage?: () => void;
   onDisadvantage?: () => void;
-  hasSelectedDice: boolean; // 👈 nova prop
+  hasSelectedDice: boolean;
 }
 
 export default function Footer({
@@ -27,8 +27,8 @@ export default function Footer({
         </Button>
         <Button
           onClick={onRoll}
-          variant={hasSelectedDice ? "default" : "outline"} // 👈 variante condicional
-          className={`col-span-2 min-h-18 rounded-2xl relative text-background-foreground text-2xl uppercase tracking-widest font-semibold ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-primary" : ""}`}
+          variant={hasSelectedDice ? "default" : "outline"}
+          className={`col-span-2 min-h-18 rounded-2xl relative  text-2xl uppercase tracking-widest font-semibold ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-primary text-primary-foreground" : "text-primary"}`}
         >
           <ZapIcon className="size-5" />
           Rolar

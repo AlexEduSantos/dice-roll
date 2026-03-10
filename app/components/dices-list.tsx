@@ -57,7 +57,7 @@ export default function DicesList() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-full relative">
+      <div className="flex flex-col gap-4 w-full relative bg-background">
         <Header />
         <div className="px-4 flex flex-col gap-4">
           {/* Dados */}

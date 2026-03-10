@@ -1,6 +1,5 @@
-import { SettingsIcon } from "lucide-react";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Header() {
   return (
@@ -11,6 +10,7 @@ export default function Header() {
         </div>
         <h2 className="text-3xl font-bold">Dice Roll</h2>
       </div>
+      <ThemeToggle />
     </div>
   );
 }
