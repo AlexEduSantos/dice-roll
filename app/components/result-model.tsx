@@ -62,7 +62,7 @@ function NormalResult({ result }: { result: RollResult }) {
           <CriticalMessage entry={result.entries[0]} />
         )}
         <span className="p-5 rounded-full self-center bg-secondary flex items-center justify-center shadow-[0_0px_20px_5px] shadow-secondary mb-4">
-          <DicesIcon className="size-10 text-primary stroke-1" />
+          <Zap className="size-10 text-primary stroke-1" />
         </span>
         <p className="text-sm uppercase font-bold tracking-widest text-primary">
           Resultado

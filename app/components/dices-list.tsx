@@ -124,12 +124,7 @@ export default function DicesList() {
           </div>
 
           {/* Histórico (mantido como estava) */}
-          <div
-            className={`h-fit mb-16 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary-foreground scrollbar-track-accent px-2 ${
-              history.length <= 3 &&
-              "scrollbar-thumb-transparent scrollbar-track-transparent"
-            }`}
-          >
+          <div className={`h-fit mb-16 overflow-y-scroll scrollbar-none px-2`}>
             <div className="md:mt-6 mb-12">
               <div className="flex gap-2 items-center mb-3">
                 <TextAlignJustifyIcon className="size-5 text-primary" />
