@@ -21,7 +21,7 @@ export default function Footer({
           variant={hasSelectedDice ? "ghost" : "outline"}
           onClick={onAdvantage}
           disabled={!hasSelectedDice}
-          className={`flex flex-col items-center rounded-2xl h-full w-full text-[10px] font-light uppercase tracking-wide text-muted-foreground ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-advantage/20 text-advantage border-advantage/50" : "text-primary-foreground border-border"}`}
+          className={`flex flex-col items-center rounded-2xl h-full w-full text-[10px] font-light uppercase tracking-wide text-muted-foreground ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-advantage/20 text-advantage border-advantage/50" : "text-background-foreground border-border"}`}
         >
           <ArrowUp />
           Vantagem
@@ -38,7 +38,7 @@ export default function Footer({
           variant={hasSelectedDice ? "ghost" : "outline"}
           onClick={onDisadvantage}
           disabled={!hasSelectedDice}
-          className={`flex flex-col items-center rounded-2xl h-full w-full text-[10px] font-light uppercase tracking-wide text-muted-foreground ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-disadvantage/20 text-disadvantage border-disadvantage/50" : "text-primary-foreground border-border"}`}
+          className={`flex flex-col items-center rounded-2xl h-full w-full text-[10px] font-light uppercase tracking-wide text-muted-foreground ${hasSelectedDice ? "shadow-[0_0px_10px_0px] shadow-disadvantage/20 text-disadvantage border-disadvantage/50" : "text-background-foreground border-border"}`}
         >
           <ArrowDown />
           Desvantagem

@@ -29,20 +29,13 @@ export function ResultModal({ open, onOpenChange, result }: ResultModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md bg-background/70 backdrop-blur-sm rounded-3xl border border-primary/50 shadow-[0_0px_30px_0px] shadow-primary/50 overflow-hidden ">
-        <span className="absolute inset-0 bg-linear-to-tr from-primary/10 via-primary/5 to-transparent pointer-events-none" />
+        <span className="absolute inset-0 bg-primary/5 pointer-events-none" />
         <DialogTitle className="sr-only">Resultado da Rolagem</DialogTitle>
 
         {!isAdvantage && <NormalResult result={result as RollResult} />}
         {isAdvantage && (
           <AdvantageResult result={result as AdvantageRollResult} />
         )}
-
-        <DialogClose
-          onClick={() => onOpenChange(false)}
-          className="flex justify-center w-full border rounded-lg p-4 bg-input/70"
-        >
-          FECHAR
-        </DialogClose>
       </DialogContent>
     </Dialog>
   );
@@ -114,19 +107,22 @@ function AdvantageResult({ result }: { result: AdvantageRollResult }) {
   const { kept, discarded, mode, first, second } = result;
   const isAdvantage = mode === "advantage";
 
+  console.log(result);
   return (
     <div className="space-y-4">
       <div className="text-center">
         <div className="flex justify-center gap-1 mt-2 text-xs">
           <span
-            className={`px-4 py-1 rounded-full tracking-[3px] font-bold ${isAdvantage ? "text-background bg-advantage" : "text-white bg-disvantage"}`}
+            className={`px-4 py-1 rounded-full tracking-[3px] font-bold ${isAdvantage ? "text-background bg-advantage" : "text-disadvantage-foreground bg-disadvantage"}`}
           >
             {isAdvantage ? "VANTAGEM" : "DESVANTAGEM"}
           </span>
+          {kept.entries.length === 1 && (
+            <CriticalMessage entry={kept.entries[0]} />
+          )}
         </div>
       </div>
-
-      <div className="flex flex-col gap-4 py-4 items-center justify-center">
+      <div className="flex flex-col gap-4 py-4 items-center justify-center border-b border-border">
         <span className="p-5 rounded-full self-center bg-secondary flex items-center justify-center shadow-[0_0px_20px_5px] shadow-secondary mb-4">
           <DicesIcon className="size-10 text-primary stroke-1" />
         </span>
@@ -136,16 +132,16 @@ function AdvantageResult({ result }: { result: AdvantageRollResult }) {
         <div className="flex gap-6 items-center">
           <div className="text-center flex flex-col items-center gap-2">
             <div
-              className={`w-fit h-fit rounded-full p-8 bg-background/80 aspect-square relative ${isAdvantage ? "shadow-advantage/50 border-advantage border-4 shadow-[0_0px_10px_5px]" : "shadow-disvantage/50 border-disvantage border-4 shadow-[0_0px_10px_5px]"}`}
+              className={`w-fit h-fit rounded-full p-8 bg-background/80 aspect-square relative ${isAdvantage ? "shadow-advantage/50 border-advantage border-4 shadow-[0_0px_10px_5px]" : "shadow-disadvantage/50 border-disadvantage border-4 shadow-[0_0px_10px_5px]"}`}
             >
               <p
-                className={`text-4xl font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isAdvantage ? "text-advantage" : "text-disvantage"}`}
+                className={`text-4xl font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isAdvantage ? "text-advantage" : "text-disadvantage"}`}
               >
-                {kept.total}
+                {kept.total - kept.bonus}
               </p>
             </div>
             <p
-              className={`text-xs  ${isAdvantage ? "text-advantage" : "text-disvantage"}`}
+              className={`text-xs  ${isAdvantage ? "text-advantage" : "text-disadvantage"}`}
             >
               MANTIDO
             </p>
@@ -157,7 +153,7 @@ function AdvantageResult({ result }: { result: AdvantageRollResult }) {
               <p
                 className={`text-4xl font-bold text-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
               >
-                {discarded.total}
+                {discarded.total - discarded.bonus}
               </p>
             </div>
             <p className={`text-xs  text-muted-foreground`}>DESCARTADO</p>
@@ -167,11 +163,9 @@ function AdvantageResult({ result }: { result: AdvantageRollResult }) {
 
       <div className="text-center">
         <p className="text-xs uppercase tracking-wide text-muted-foreground">
-          Total final ({kept.total} + {kept.bonus} )
+          Total final ({kept.total - kept.bonus} + {kept.bonus} )
         </p>
-        <p className="text-3xl font-bold text-foreground">
-          {kept.total + kept.bonus}
-        </p>
+        <p className="text-3xl font-bold text-foreground">{kept.total}</p>
       </div>
 
       <div className="text-center">
@@ -179,7 +173,8 @@ function AdvantageResult({ result }: { result: AdvantageRollResult }) {
           Fórmula
         </p>
         <p className="text-lg tracking-[2px]">
-          [{first.total}, {second.total}] + {kept.bonus}
+          [{first.total - first.bonus}, {second.total - second.bonus}] +{" "}
+          {kept.bonus}
         </p>
       </div>
     </div>
@@ -201,7 +196,7 @@ function CriticalMessage({ entry }: { entry: RollEntry }) {
   if (allMin)
     return (
       <div className="px-4 py-1 tracking-[4px] rounded-full bg-accent self-center w-fit">
-        <p className="text-center text-accent-foreground font-bold">FALHA!</p>
+        <p className="text-center text-accent-foreground font-bold">FALHA</p>
       </div>
     );
   return null;
