@@ -1,19 +1,11 @@
 "use client";
 import Image from "next/image";
 import { Card } from "./ui/card";
-import { MouseEvent } from "react";
 import { Button } from "./ui/button";
-
-interface Die {
-  id: number;
-  name: string;
-  faces: number;
-  image: string;
-  color: string;
-}
+import { Dice } from "../hooks/use-dice-roll";
 
 interface DiceItemProps {
-  dice: Die;
+  dice: Dice;
   quantity: number;
   selected: boolean;
   onIncrement: () => void;
@@ -21,27 +13,23 @@ interface DiceItemProps {
   onToggle: () => void;
 }
 
-const DiceItem = ({
+export default function DiceItem({
   dice,
   quantity,
   selected,
   onIncrement,
   onDecrement,
   onToggle,
-}: DiceItemProps) => {
-  const data = dice;
-
-  function handleImageClick(e: MouseEvent) {
-    e.stopPropagation();
-    onIncrement();
-  }
-
+}: DiceItemProps) {
   return (
     <Card
-      className={`w-full md:min-w-28 flex items-center justify-center gap-4 p-3 ${
-        selected ? "ring-2" : "hover:ring-1"
+      className={`w-full md:min-w-28 min-h-40 flex items-center justify-center gap-4 p-3 ${
+        selected ? `ring-1 shadow-[0_0_8px_1px]` : "hover:ring-1 shadow-none"
       }`}
-      style={{ ["--tw-ring-color" as any]: `var(--${data.name})` }}
+      style={{
+        ["--tw-ring-color" as any]: `var(--${dice.name})`,
+        ["--tw-shadow-color" as any]: `var(--${dice.name})`,
+      }}
     >
       <div
         role="button"
@@ -50,43 +38,47 @@ const DiceItem = ({
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") onToggle();
         }}
-        className={`p-2 rounded-full `}
+        className="p-2 rounded-full"
       >
         <div className="relative overflow-visible aspect-square h-14">
           <Image
-            src={data.image}
-            alt={data.name}
+            src={dice.image}
+            alt={dice.name}
             fill
             sizes=""
             priority
             className="object-contain cursor-pointer"
-            onClick={handleImageClick}
+            onClick={(e) => {
+              e.stopPropagation();
+              onIncrement();
+            }}
           />
         </div>
       </div>
 
-      <div className="flex items-center gap-3 ">
+      <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           <Button
-            aria-label={`Diminuir ${data.name}`}
+            aria-label={`Diminuir ${dice.name}`}
             onClick={onDecrement}
             variant="outline"
+            className="text-muted-foreground"
             size="sm"
           >
             -
           </Button>
           <div
             className="text-sm font-bold min-w-12 capitalize flex items-center justify-center"
-            style={{ color: `var(--${data.name})` }}
+            style={{ color: `var(--${dice.name})` }}
           >
             {quantity > 0 && <span>{quantity}</span>}
-
-            <span className="capitalize">{data.name}</span>
+            <span className="capitalize">{dice.name}</span>
           </div>
           <Button
-            aria-label={`Aumentar ${data.name}`}
+            aria-label={`Aumentar ${dice.name}`}
             onClick={onIncrement}
             variant="outline"
+            className="text-muted-foreground"
             size="sm"
           >
             +
@@ -95,6 +87,4 @@ const DiceItem = ({
       </div>
     </Card>
   );
-};
-
-export default DiceItem;
+}
